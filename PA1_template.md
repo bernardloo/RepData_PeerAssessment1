@@ -233,4 +233,4 @@ qplot(interval, steps, data=FindDay, geom=c("line"), xlab="5-min intervals",
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-5-1.png) 
-
+.
