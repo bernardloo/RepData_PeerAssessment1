@@ -12,16 +12,64 @@ output:
 
 2. Process/transform the data (if necessary) into a format suitable for your analysis
 
+```{r, echo=TRUE}
+setwd("C:/A_R/5-ReproRes/RepData_PeerAssessment1")
+
+activity <- read.table(file = "activity.csv", header = TRUE, sep = ",")
+
+```
+
 ## What is mean total number of steps taken per day?
 
+For this part of the assignment, you can ignore the missing values in the dataset.
 
+1. Make a histogram of the total number of steps taken each day
+t
+2. Calculate and report the mean and median total number of steps taken per day
+
+```{r, echo=TRUE}
+
+install.packages("lattice")
+library("lattice", lib.loc="~/R/win-library/3.1")
+
+activity$DateTime <- as.POSIXct(with(activity, paste(date, paste(interval %/% 100, interval %% 100, sep=":"))),
+    format="%Y-%m-%d %H:%M",tz="")
+
+AddSteps <- setNames(aggregate(steps~as.Date(date), activity, sum, na.rm = TRUE), c("date","steps"))
+
+xaxis <- seq(1, nrow(AddSteps), by = 6)
+
+okscale <- list(x = list(rot = 45, cex = 1.0, labels = format(AddSteps$date, "%d-%b-%Y")[xaxis], at = xaxis))
+
+barchart(date ~ steps, data = AddSteps, main = "Steps/Day", ylab = "Steps", xlab = "Date", scales = okscale, horizontal = F)
+
+paste("mean:", mean(AddSteps$steps))
+paste("median:", median(AddSteps$steps))
+
+```
 
 ## What is the average daily activity pattern?
 
+
+```{r, echo=TRUE}
+
+
+
+```
 
 
 ## Imputing missing values
 
 
+```{r, echo=TRUE}
+
+```
+
 
 ## Are there differences in activity patterns between weekdays and weekends?
+
+
+```{r, echo=TRUE}
+
+```
+
